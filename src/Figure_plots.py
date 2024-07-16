@@ -1,8 +1,5 @@
 import numpy as np
-import random
-import umap
 from scipy.stats import gaussian_kde
-from scipy.cluster.hierarchy import linkage, dendrogram
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from matplotlib.ticker import MultipleLocator
@@ -61,7 +58,7 @@ def Cell_Bar_generator(Cell_Label, Label_list, All_resampling_std, color):
 
     """
 
-    Cell_Type_Main = ['CTRL', 'MDAEVs', 'BrEVs']
+    Cell_Type_Main = ['PBS', 'MDAEVs', 'BrEVs']
     Cell_Type_Rab = ['Rab7', 'Rab11fip2', 'Rab11fip3', 'Rab11fip5']
 
     groups = ['Cluster_{}'.format(g_i) for g_i in range(1, len(np.unique(Label_list))+1)]
@@ -99,7 +96,7 @@ def Cell_Bar_generator(Cell_Label, Label_list, All_resampling_std, color):
     x_main = np.arange(1, len(groups)+1)
 
     figure, ax1 = plt.subplots()
-    ax1.bar(x_main-0.25, all_bar_main_cell[:, 0], yerr=All_resampling_std[0, :], width=0.25, edgecolor='black', capsize=5, label='CTRL')
+    ax1.bar(x_main-0.25, all_bar_main_cell[:, 0], yerr=All_resampling_std[0, :], width=0.25, edgecolor='black', capsize=5, label='PBS')
     ax1.bar(x_main, all_bar_main_cell[:, 1], yerr=All_resampling_std[1, :], width=0.25, edgecolor='black', capsize=5, label='MDAEVs')
     ax1.bar(x_main+0.25, all_bar_main_cell[:, 2], yerr=All_resampling_std[2, :], width=0.25, edgecolor='black', capsize=5, label='BrEVs')
     ax1.set_xlabel('Cluster', fontsize=12)

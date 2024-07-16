@@ -1,6 +1,4 @@
-import numpy as np
 from src.Utilities import *
-from src.Figure_plots import *
 
 # Parameter Setting ====================================================================================================
 # If the user has his/her own dataset, please change the path
