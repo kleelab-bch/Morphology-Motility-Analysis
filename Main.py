@@ -7,7 +7,7 @@ from src.Utilities import *
 
 Data_file = 'Testing/Motility_Features.csv'
 Feature_type = 'Mot'
-save_figure = False
+save_figure = True
 
 # Main Function ========================================================================================================
 # main function has three arbitrary keyword arguments: Cell_Type, cluster_parameters, balanced_sign
