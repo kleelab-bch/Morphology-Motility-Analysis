@@ -1,3 +1,5 @@
+import umap
+import random
 import pandas as pd
 from scipy.stats import zscore
 from sklearn.cluster import SpectralClustering
@@ -22,6 +24,7 @@ def main(Data_file, Feature_type, **kwargs):
                                   The first two are used for UMAP generation and the last one is for clustering. It is recommended
                                   that the clustering number should be kept below 10. Default is [10, 0, 9].
                 balanced_sign (boolean): Balance the sample numbers of different cell type for the analysis. Default is True.
+                save_figure (boolean): Save the figure plot in the default folder. if False, the figures are shown directly. Default is True.
 
     Output:
           All the figures will be saved in the Result_plot folder.
@@ -31,6 +34,7 @@ def main(Data_file, Feature_type, **kwargs):
     Cell_Type = kwargs.get('Cell_Type', ['CTRLs', 'MDAEVs', 'BrEVs', 'Rab7', 'Rab11fip2', 'Rab11fip3', 'Rab11fip5'])
     cluster_parameters = kwargs.get('cluster_parameters', [10, 0, 9])
     balanced_sign = kwargs.get('balanced_sign', True)
+    save_figure = kwargs.get('save_figure', True)
 
     df = pd.read_csv(Data_file)
     col_index = list(df.columns.values)
@@ -55,10 +59,10 @@ def main(Data_file, Feature_type, **kwargs):
                  "#17becf"]
 
     # Motility Feature Distribution Map
-    Feature_Distribution_generator(embedding, Label_list, color, Feature_type)
+    Feature_Distribution_generator(embedding, Label_list, color, Feature_type, save_figure)
 
     # Cluster Bar Graph Plot in each Cell Type
-    Cell_Bar_generator(Cell_Label, Label_list, All_resampling_std, color)
+    Cell_Bar_generator(Cell_Label, Label_list, All_resampling_std, color, save_figure)
 
     # Cell Type Distribution Plot
     cell_distribution_plot(embedding, Cell_Label, Cell_Type)
@@ -82,7 +86,7 @@ def main(Data_file, Feature_type, **kwargs):
         else:
             Feature_list = np.vstack((Feature_list, f_all))
 
-    feature_matrix_generator(Feature_list, col_index, Feature_type, balanced_sign)
+    feature_matrix_generator(Feature_list, col_index, Feature_type, balanced_sign, save_figure)
 
 
 def Convert_Type_Number(CT_tmp, Cell_Type):

@@ -3,9 +3,11 @@ from src.Utilities import *
 # Parameter Setting ====================================================================================================
 # If the user has his/her own dataset, please change the path
 # Please select what kind of feature will be analyzed: 'Morph'(morphology) or 'Mot'(motility)
+# Save(True) or Plot(False) the figures
 
-Data_file = 'Testing/qPI_Motility_Features.csv'
+Data_file = 'Testing/Motility_Features.csv'
 Feature_type = 'Mot'
+save_figure = False
 
 # Main Function ========================================================================================================
 # main function has three arbitrary keyword arguments: Cell_Type, cluster_parameters, balanced_sign
@@ -16,4 +18,4 @@ Feature_type = 'Mot'
 #
 
 if __name__ == "__main__":
-    main(Data_file, Feature_type)
+    main(Data_file, Feature_type, save_figure=save_figure)

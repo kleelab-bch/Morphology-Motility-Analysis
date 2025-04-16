@@ -7,7 +7,7 @@ from matplotlib.ticker import MultipleLocator
 
 ## Plot the figures ====================================================================================================
 
-def Feature_Distribution_generator(embedding, Label_list, color, feature_type):
+def Feature_Distribution_generator(embedding, Label_list, color, feature_type, save_figure):
     """
 
     Plot the feature distribution map
@@ -40,10 +40,14 @@ def Feature_Distribution_generator(embedding, Label_list, color, feature_type):
     plt.title(title_name, fontsize=24)
     lgnd = plt.legend(title='Clusters')
     for c_i in np.unique(Label_list):
-        lgnd.legendHandles[c_i-1]._sizes = [30]
-    plt.savefig('Result_plot/Feature_Distribution.png', bbox_inches='tight')
+        lgnd.legend_handles[c_i-1]._sizes = [30]
 
-def Cell_Bar_generator(Cell_Label, Label_list, All_resampling_std, color):
+    if save_figure:
+        plt.savefig('Result_plot/Feature_Distribution.png', bbox_inches='tight')
+    else:
+        plt.show()
+
+def Cell_Bar_generator(Cell_Label, Label_list, All_resampling_std, color, save_figure):
     """
 
     Plot the cell bar for main three cell types and Rab-based cell types
@@ -107,7 +111,8 @@ def Cell_Bar_generator(Cell_Label, Label_list, All_resampling_std, color):
     plt.yticks(fontsize=10)
     plt.legend()
     ax1.set_ylim(top=65)
-    plt.savefig('Result_plot/Main_cell_bar.png', bbox_inches='tight')
+    if save_figure:
+        plt.savefig('Result_plot/Main_cell_bar.png', bbox_inches='tight')
 
     # Rab-based Cluster Bar graph Plot
 
@@ -153,7 +158,11 @@ def Cell_Bar_generator(Cell_Label, Label_list, All_resampling_std, color):
     plt.xticks(fontsize=12)
     ax[1, 1].set_ylim(top=60)
     figure.tight_layout(pad=1)
-    plt.savefig('Result_plot/Rab_cell_bar.png', bbox_inches='tight')
+
+    if save_figure:
+        plt.savefig('Result_plot/Rab_cell_bar.png', bbox_inches='tight')
+    else:
+        plt.show()
 
 def cell_distribution_plot(embedding, Cell_Label, Cell_Type):
     """
@@ -186,7 +195,7 @@ def cell_distribution_plot(embedding, Cell_Label, Cell_Type):
         plt.yticks(fontsize=16)
         plt.title(Cell_Type[j], fontsize=24)
 
-def feature_matrix_generator(Feature_list, col_index, Feature_type, balanced_sign):
+def feature_matrix_generator(Feature_list, col_index, Feature_type, balanced_sign, save_figure):
     """
 
     Plot the Feature matrix
@@ -231,4 +240,7 @@ def feature_matrix_generator(Feature_list, col_index, Feature_type, balanced_sig
     clb.ax.set_title('Scaled\n Value', fontsize=8)
     clb.ax.tick_params(labelsize=7)
 
-    plt.savefig('Result_plot/Feature_matrix.png', bbox_inches='tight')
+    if save_figure:
+        plt.savefig('Result_plot/Feature_matrix.png', bbox_inches='tight')
+    else:
+        plt.show()
